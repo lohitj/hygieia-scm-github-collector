@@ -67,7 +67,7 @@ public class GitHubCollectorTask extends CollectorTask<Collector> {
                                GitHubClient gitHubClient,
                                GitHubSettings gitHubSettings,
                                ComponentRepository dbComponentRepository) {
-        super(taskScheduler, "GitHub");
+        super(taskScheduler, "My_Collector");
         this.collectorRepository = collectorRepository;
         this.gitHubRepoRepository = gitHubRepoRepository;
         this.commitRepository = commitRepository;
