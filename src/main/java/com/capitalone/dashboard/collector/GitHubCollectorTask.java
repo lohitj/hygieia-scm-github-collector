@@ -86,7 +86,7 @@ public class GitHubCollectorTask extends CollectorTask<Collector> {
     @Override
     public Collector getCollector() {
         Collector protoType = new Collector();
-        protoType.setName("GitHub");
+        protoType.setName("My_Collector");
         protoType.setCollectorType(CollectorType.SCM);
         protoType.setOnline(true);
         protoType.setEnabled(true);
