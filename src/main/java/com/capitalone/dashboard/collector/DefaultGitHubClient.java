@@ -96,7 +96,7 @@ public class DefaultGitHubClient implements GitHubClient {
         	String description = str(descObject, "description");
         	Sample sample = new Sample();
         	sample.setTitle(title);
-        	sample.setDescription(description);
+        	sample.setSampledescr(description);
         	samples.add(sample);
          }
         return samples;
