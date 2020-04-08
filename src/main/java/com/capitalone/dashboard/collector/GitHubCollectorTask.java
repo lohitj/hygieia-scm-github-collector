@@ -10,6 +10,7 @@ import com.capitalone.dashboard.model.Commit;
 import com.capitalone.dashboard.model.CommitType;
 import com.capitalone.dashboard.model.GitHubRepo;
 import com.capitalone.dashboard.model.GitRequest;
+import com.capitalone.dashboard.model.Sample;
 import com.capitalone.dashboard.repository.BaseCollectorRepository;
 import com.capitalone.dashboard.repository.CommitRepository;
 import com.capitalone.dashboard.repository.ComponentRepository;
@@ -202,6 +203,10 @@ public class GitHubCollectorTask extends CollectorTask<Collector> {
                             commitRepository.save(commit);
                             commitCount++;
                         }
+                    }
+                    for(Sample sample : gitHubClient.getSample(repo)) {
+                    	LOG.debug("Sample by Lohit Jain");
+                    	gitHubRepoRepository.save(sample);
                     }
 
                     // Step 2: Get all the issues

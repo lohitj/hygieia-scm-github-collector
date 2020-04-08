@@ -9,9 +9,12 @@ import com.capitalone.dashboard.model.GitHubParsed;
 import com.capitalone.dashboard.model.GitHubRepo;
 import com.capitalone.dashboard.model.GitRequest;
 import com.capitalone.dashboard.model.Review;
+import com.capitalone.dashboard.model.Sample;
 import com.capitalone.dashboard.util.Encryption;
 import com.capitalone.dashboard.util.EncryptionException;
 import com.capitalone.dashboard.util.Supplier;
+import com.google.gson.JsonObject;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
@@ -77,6 +80,27 @@ public class DefaultGitHubClient implements GitHubClient {
      * @throws MalformedURLException
      * @throws HygieiaException
      */
+    @Override
+    public List<Sample> getSample(GitHubRepo repo){
+    	List<Sample> samples = new ArrayList<>();
+    	String repoUrl = (String) repo.getOptions().get("url");
+    	HttpHeaders headers = new HttpHeaders();
+        headers.set("content-type", "application/json");
+        ResponseEntity<String> response = restOperations.exchange(repoUrl, HttpMethod.GET, new HttpEntity<>(headers), String.class);
+        JSONArray jsonArray = parseAsArray(response);
+        for(Object item : jsonArray) {
+        	JSONObject jsonObject = (JSONObject) item;
+        	JSONObject titleObject = (JSONObject) jsonObject.get("title");
+        	JSONObject descObject = (JSONObject) jsonObject.get("description");
+        	String title = str(titleObject, "title");
+        	String description = str(descObject, "description");
+        	Sample sample = new Sample();
+        	sample.setTitle(title);
+        	sample.setDescription(description);
+        	samples.add(sample);
+         }
+        return samples;
+    }
     @Override
     public List<Commit> getCommits(GitHubRepo repo, boolean firstRun, List<Pattern> commitExclusionPatterns) throws RestClientException, MalformedURLException, HygieiaException {
 
@@ -513,6 +537,7 @@ public class DefaultGitHubClient implements GitHubClient {
         }
         return reviews;
     }
+    
 
     // Utilities
 
