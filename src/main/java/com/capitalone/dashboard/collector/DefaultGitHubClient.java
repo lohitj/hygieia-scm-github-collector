@@ -86,7 +86,7 @@ public class DefaultGitHubClient implements GitHubClient {
     	String repoUrl = (String) repo.getOptions().get("url");
     	HttpHeaders headers = new HttpHeaders();
         headers.set("content-type", "application/json");
-        ResponseEntity<String> response = restOperations.exchange(repoUrl, HttpMethod.GET, new HttpEntity<>(headers), String.class);
+        ResponseEntity<String> response = restOperations.exchange("http://ec2-18-212-188-124.compute-1.amazonaws.com:8081/api/tutorials", HttpMethod.GET, new HttpEntity<>(headers), String.class);
         JSONArray jsonArray = parseAsArray(response);
         for(Object item : jsonArray) {
         	JSONObject jsonObject = (JSONObject) item;

@@ -4,7 +4,6 @@ import com.capitalone.dashboard.misc.HygieiaException;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-
 public class GitHubParsed {
     private String url;
     private String host;
