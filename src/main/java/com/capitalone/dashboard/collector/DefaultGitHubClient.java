@@ -83,22 +83,22 @@ public class DefaultGitHubClient implements GitHubClient {
     @Override
     public List<Sample> getSample(GitHubRepo repo){
     	List<Sample> samples = new ArrayList<>();
-    	String repoUrl = (String) repo.getOptions().get("url");
-    	HttpHeaders headers = new HttpHeaders();
-        headers.set("content-type", "application/json");
-        ResponseEntity<String> response = restOperations.exchange("http://ec2-18-212-188-124.compute-1.amazonaws.com:8081/api/tutorials", HttpMethod.GET, new HttpEntity<>(headers), String.class);
-        JSONArray jsonArray = parseAsArray(response);
-        for(Object item : jsonArray) {
-        	JSONObject jsonObject = (JSONObject) item;
-        	JSONObject titleObject = (JSONObject) jsonObject.get("title");
-        	JSONObject descObject = (JSONObject) jsonObject.get("description");
-        	String title = str(titleObject, "title");
-        	String description = str(descObject, "description");
+    	//String repoUrl = (String) repo.getOptions().get("url");
+    	//HttpHeaders headers = new HttpHeaders();
+        //headers.set("content-type", "application/json");
+        //ResponseEntity<String> response = restOperations.exchange("http://ec2-18-212-188-124.compute-1.amazonaws.com:8081/api/tutorials", HttpMethod.GET, new HttpEntity<>(headers), String.class);
+        //JSONArray jsonArray = parseAsArray(response);
+        //for(Object item : jsonArray) {
+        	//JSONObject jsonObject = (JSONObject) item;
+        	//JSONObject titleObject = (JSONObject) jsonObject.get("title");
+        	//JSONObject descObject = (JSONObject) jsonObject.get("description");
+        	//String title = str(titleObject, "title");
+        	//String description = str(descObject, "description");
         	Sample sample = new Sample();
-        	sample.setTitle(title);
-        	sample.setSampledescr(description);
+        	sample.setTitle("Example");
+        	sample.setSampledescr("Testing");
         	samples.add(sample);
-         }
+        //}
         return samples;
     }
     @Override
